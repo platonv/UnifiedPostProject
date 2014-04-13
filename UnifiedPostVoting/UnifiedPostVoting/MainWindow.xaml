@@ -1,0 +1,6 @@
+﻿<Window x:Class="UnifiedPostVoting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="800" WindowStyle="ThreeDBorderWindow">
+        <Frame x:Name="contentFrame"  Content="Frame" HorizontalAlignment="Left" Height="600" Margin="0,0,0,0" VerticalAlignment="Top" Width="800" NavigationUIVisibility="Hidden"/>
+</Window>

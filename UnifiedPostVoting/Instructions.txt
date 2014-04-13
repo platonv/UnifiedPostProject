@@ -1,0 +1,2 @@
+Se compileaza cu Visual Studio 2012 Express, dar este nevoie de o baza de date "UnifiedPostDB" pe server SQLEXPRESS.
+De asemenea, trebuie schimbat connection string-ul din DataAccesLayer.cs.

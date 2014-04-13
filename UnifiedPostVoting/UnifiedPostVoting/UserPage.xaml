@@ -1,0 +1,174 @@
+﻿<Page x:Class="UnifiedPostVoting.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+	Title="UserPage">
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                             Color="#FFCB993D" />
+
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#444444" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#444444" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#F87C2C"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="7" Height="22">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Background.Color" To="Yellow" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Background.Color" To="#F87C2C" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="LightGray" />
+        </Style>
+
+        <!--Product Data Template-->
+        <DataTemplate x:Key="ProductTemplate">
+
+            <Grid ToolTip="{Binding Info}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+
+                <TextBlock FontSize="20"  Name="TextBlockNamePr" Text="{Binding Name}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock    Text="Votes:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0" />
+                    <TextBlock   Name="TextBlockPunctajPr" Text="{Binding VotesNumber}" Grid.Row="0" Grid.Column="1" Margin="5,0" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock  Text="Cost:" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="5,0"/>
+                    <TextBlock   Name="TextBlockCostVot" Text="{Binding Cost}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="5,0"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Tag="{Binding ID}" Width="80" Grid.Column="4" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" >
+                    <Button Width="30" Click="BtnPlus_Click_1" HorizontalAlignment="Right" Name="BtnPlus"  Content="+" />
+                    <TextBlock Width="30"  HorizontalAlignment="Right" Name="TextBoxPuntaj" />
+                    <Button Width="30" Click="BtnMinus_Click_1"  HorizontalAlignment="Right" Name="BtnMinus" Content="-" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <!--MainGrid-->
+    <Page.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <!--User Information goes down here-->
+            <StackPanel Grid.ColumnSpan="2" Background="#4D5965" Orientation="Horizontal">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="266"/>
+                        <ColumnDefinition Width="268"/>
+                        <ColumnDefinition Width="266"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <TextBlock Text="Welcome! " FontSize="20"/>
+                        <TextBlock Name="TextBlockUserName" FontWeight="SemiBold" FontSize="30"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+                        <TextBlock HorizontalAlignment="Left" Text="Points:" FontSize="20"/>
+                        <TextBlock HorizontalAlignment="Left"  Name="TextBlockUserPoints" Text="{Binding Points, ElementName=UserWindow}" FontWeight="SemiBold" FontSize="30"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <!--Navigation Menu-->
+            <Menu Grid.Row="1" Name="GroupsMenu" Background="White" Margin="0,0,0,34" >
+
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+            </Menu>
+
+            <Frame Grid.Column="1" 
+                 Grid.Row="1"
+               Name="FrameViewWelcome"/>
+            <Frame Grid.Column="1" 
+                 Grid.Row="1"
+               Name="FrameViewList"/>
+            <ListBox 
+                 Grid.Row="1" 
+                 ScrollViewer.CanContentScroll="False"
+                 Name="ProductsListBox"
+                 ItemTemplate="{StaticResource ProductTemplate}" Margin="156,0,4,34" Grid.ColumnSpan="2"
+                 />
+            <!--Submit Button-->
+            <Button  Grid.Row="1" VerticalAlignment="Bottom" Name="SubmitPoints" Content="Submit Points" Click="SubmitPoints_Click_1" Margin="0,0,0,59"/>
+        </Grid>
+    </Page.Content>
+</Page>
